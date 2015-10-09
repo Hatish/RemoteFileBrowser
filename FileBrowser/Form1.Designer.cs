@@ -39,6 +39,8 @@
             this.left.Name = "left";
             this.left.Size = new System.Drawing.Size(490, 709);
             this.left.TabIndex = 0;
+            this.left.MouseClick += new System.Windows.Forms.MouseEventHandler(this.left_MouseClick);
+            this.left.DoubleClick += new System.EventHandler(this.left_DoubleClick);
             // 
             // right
             // 
@@ -47,15 +49,16 @@
             this.right.Name = "right";
             this.right.Size = new System.Drawing.Size(490, 709);
             this.right.TabIndex = 1;
+            this.right.MouseClick += new System.Windows.Forms.MouseEventHandler(this.right_MouseClick);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 729);
             this.Controls.Add(this.right);
             this.Controls.Add(this.left);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.ResumeLayout(false);
 
         }

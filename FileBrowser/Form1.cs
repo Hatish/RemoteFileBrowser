@@ -65,6 +65,28 @@ namespace FileBrowser
 
             }
         }
+
+        private void left_DoubleClick(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Double Click! - " + left.SelectedIndex);
+            this.left.SetItemChecked(this.left.SelectedIndex, !this.left.GetItemChecked(this.left.SelectedIndex));
+        }
+
+        private void left_MouseClick(object sender, MouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Left) & (e.X > 13))
+            {
+                this.left.SetItemChecked(this.left.SelectedIndex, !this.left.GetItemChecked(this.left.SelectedIndex));
+            }
+        }
+
+        private void right_MouseClick(object sender, MouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Left) & (e.X > 13))
+            {
+                this.right.SetItemChecked(this.right.SelectedIndex, !this.right.GetItemChecked(this.right.SelectedIndex));
+            }
+        }
     }
 
     public class ClientCallback : IClientCallback
@@ -86,8 +108,6 @@ namespace FileBrowser
                 {
                     form.UpdatePanes();
                 });
-
-                
             }
         }
     }
