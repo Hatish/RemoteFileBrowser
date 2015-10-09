@@ -1,0 +1,8 @@
+C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RemoteFileBrowser.exe.config
+C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.csprojResolveAssemblyReference.cache
+C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RemoteFileBrowser.exe
+C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RemoteFileBrowser.pdb
+C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RabbitMQ.Client.dll
+C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RabbitMQ.Client.xml
+C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.exe
+C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.pdb

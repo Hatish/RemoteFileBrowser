@@ -1,0 +1,11 @@
+C:\Temp\Apps\RemoteFileBrowser\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
+C:\Temp\Apps\RemoteFileBrowser\Helpers\bin\Debug\Helpers.dll
+C:\Temp\Apps\RemoteFileBrowser\Helpers\bin\Debug\Helpers.pdb
+C:\Temp\Apps\RemoteFileBrowser\Helpers\bin\Debug\Models.dll
+C:\Temp\Apps\RemoteFileBrowser\Helpers\bin\Debug\Newtonsoft.Json.dll
+C:\Temp\Apps\RemoteFileBrowser\Helpers\bin\Debug\RabbitMQ.Client.dll
+C:\Temp\Apps\RemoteFileBrowser\Helpers\bin\Debug\Models.pdb
+C:\Temp\Apps\RemoteFileBrowser\Helpers\bin\Debug\Newtonsoft.Json.xml
+C:\Temp\Apps\RemoteFileBrowser\Helpers\bin\Debug\RabbitMQ.Client.xml
+C:\Temp\Apps\RemoteFileBrowser\Helpers\obj\Debug\Helpers.dll
+C:\Temp\Apps\RemoteFileBrowser\Helpers\obj\Debug\Helpers.pdb

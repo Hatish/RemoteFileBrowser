@@ -1,0 +1,17 @@
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\FileBrowser.exe.config
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\FileBrowser.exe
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\FileBrowser.pdb
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\RabbitMQ.Client.dll
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\RabbitMQ.Client.xml
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\obj\Debug\FileBrowser.csprojResolveAssemblyReference.cache
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\obj\Debug\FileBrowser.Form1.resources
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\obj\Debug\FileBrowser.Properties.Resources.resources
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\obj\Debug\FileBrowser.csproj.GenerateResource.Cache
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\obj\Debug\FileBrowser.exe
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\obj\Debug\FileBrowser.pdb
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\Helpers.dll
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\Newtonsoft.Json.dll
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\Models.dll
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\Helpers.pdb
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\Newtonsoft.Json.xml
+C:\Temp\Apps\RemoteFileBrowser\FileBrowser\bin\Debug\Models.pdb
