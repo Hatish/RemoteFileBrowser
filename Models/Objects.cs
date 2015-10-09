@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Models
 {
@@ -20,18 +21,17 @@ namespace Models
         public object Data;
     }
 
-
-    public class ListOfDrives
-    {
-        public List<Drive> Drives;
-    }
-
-    public class Drive
+    public class DriveData
     {
         public string DriveLetter;
         public string DriveName;
         public long FreeSpace;
         public long UsedSpace;
         public string DriveType;
+    }
+
+    public interface IClientCallback
+    {
+        void Handle(Response r);
     }
 }

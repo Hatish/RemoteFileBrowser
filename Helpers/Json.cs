@@ -18,7 +18,7 @@ namespace RemoteFileBrowser
 
         private static readonly Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings
         {
-            TypeNameHandling = Newtonsoft.Json.TypeNameHandling.None,
+            TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All,
             NullValueHandling = NullValueHandling.Include,
             DefaultValueHandling = DefaultValueHandling.Populate
         };

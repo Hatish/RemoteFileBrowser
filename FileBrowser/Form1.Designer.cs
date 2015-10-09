@@ -1,6 +1,6 @@
 ﻿namespace FileBrowser
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,35 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.left = new System.Windows.Forms.CheckedListBox();
+            this.right = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
-            // button1
+            // left
             // 
-            this.button1.Location = new System.Drawing.Point(5, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.left.FormattingEnabled = true;
+            this.left.Location = new System.Drawing.Point(5, 5);
+            this.left.Name = "left";
+            this.left.Size = new System.Drawing.Size(490, 709);
+            this.left.TabIndex = 0;
+            // 
+            // right
+            // 
+            this.right.FormattingEnabled = true;
+            this.right.Location = new System.Drawing.Point(685, 5);
+            this.right.Name = "right";
+            this.right.Size = new System.Drawing.Size(490, 709);
+            this.right.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1184, 729);
+            this.Controls.Add(this.right);
+            this.Controls.Add(this.left);
             this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckedListBox left;
+        private System.Windows.Forms.CheckedListBox right;
+
     }
 }
 
