@@ -3,3 +3,8 @@ C:\Temp\Apps\RemoteFileBrowser\Models\bin\Debug\Models.pdb
 C:\Temp\Apps\RemoteFileBrowser\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
 C:\Temp\Apps\RemoteFileBrowser\Models\obj\Debug\Models.dll
 C:\Temp\Apps\RemoteFileBrowser\Models\obj\Debug\Models.pdb
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\Models\bin\Debug\Models.dll
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\Models\bin\Debug\Models.pdb
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\Models\obj\Debug\Models.dll
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\Models\obj\Debug\Models.pdb

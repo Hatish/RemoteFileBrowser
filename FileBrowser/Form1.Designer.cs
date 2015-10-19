@@ -28,28 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.left = new System.Windows.Forms.CheckedListBox();
-            this.right = new System.Windows.Forms.CheckedListBox();
+            this.left = new System.Windows.Forms.ListBox();
+            this.right = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // left
             // 
+            this.left.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.left.FormattingEnabled = true;
-            this.left.Location = new System.Drawing.Point(5, 5);
+            this.left.Location = new System.Drawing.Point(13, 13);
             this.left.Name = "left";
-            this.left.Size = new System.Drawing.Size(490, 709);
-            this.left.TabIndex = 0;
-            this.left.MouseClick += new System.Windows.Forms.MouseEventHandler(this.left_MouseClick);
+            this.left.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.left.Size = new System.Drawing.Size(500, 706);
+            this.left.TabIndex = 2;
+            this.left.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.left_DrawItem);
             this.left.DoubleClick += new System.EventHandler(this.left_DoubleClick);
             // 
             // right
             // 
             this.right.FormattingEnabled = true;
-            this.right.Location = new System.Drawing.Point(685, 5);
+            this.right.Location = new System.Drawing.Point(672, 12);
             this.right.Name = "right";
-            this.right.Size = new System.Drawing.Size(490, 709);
-            this.right.TabIndex = 1;
-            this.right.MouseClick += new System.Windows.Forms.MouseEventHandler(this.right_MouseClick);
+            this.right.Size = new System.Drawing.Size(500, 706);
+            this.right.TabIndex = 3;
+            this.right.DoubleClick += new System.EventHandler(this.right_DoubleClick);
             // 
             // MainForm
             // 
@@ -65,8 +67,9 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckedListBox left;
-        private System.Windows.Forms.CheckedListBox right;
+        private System.Windows.Forms.ListBox left;
+        private System.Windows.Forms.ListBox right;
+
 
     }
 }

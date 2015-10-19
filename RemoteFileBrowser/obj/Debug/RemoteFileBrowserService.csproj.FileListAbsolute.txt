@@ -4,3 +4,9 @@ C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RemoteFileBrowser.pdb
 C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowserService.csprojResolveAssemblyReference.cache
 C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.exe
 C:\Temp\Apps\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.pdb
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RemoteFileBrowser.exe.config
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RemoteFileBrowser.exe
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RemoteFileBrowser.pdb
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowserService.csprojResolveAssemblyReference.cache
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.exe
+C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.pdb

@@ -49,7 +49,19 @@ namespace FileBrowser
             }
             else
             {
+                left.Items.Clear();
+                var files = Directory.GetFiles(leftPaneDirectory);
+                var dirs = Directory.GetDirectories(leftPaneDirectory);
 
+                foreach (var d in dirs)
+                {
+                    left.Items.Add(Path.GetFileNameWithoutExtension(d) + " [ FOLDER ]");
+                }
+
+                foreach (var f in files)
+                {
+                    left.Items.Add(Path.GetFileName(f) + " [ file ]");
+                }
             }
 
             if (String.IsNullOrEmpty(rightPaneDirectory))
@@ -64,28 +76,66 @@ namespace FileBrowser
             {
 
             }
+
+            foreach (var i in left.Items)
+            {
+                
+            }
         }
 
         private void left_DoubleClick(object sender, EventArgs e)
         {
-            Debug.WriteLine("Double Click! - " + left.SelectedIndex);
-            this.left.SetItemChecked(this.left.SelectedIndex, !this.left.GetItemChecked(this.left.SelectedIndex));
+            Debug.WriteLine("Double Click! - " + left.SelectedItem);
+
+            var s = left.SelectedItem.ToString();
+            if (s.Contains(" [ FOLDER ]"))
+            {
+                s = s.Replace(" [ FOLDER ]", "");
+                leftPaneDirectory = Path.Combine(leftPaneDirectory, s);
+                UpdatePanes();
+            }
+            else if (!s.Contains(" [ file ]") && s[3] == ' ')
+            {
+                s = s.Substring(0, 3);
+                leftPaneDirectory = Path.Combine(leftPaneDirectory, s);
+                UpdatePanes();
+            }
         }
 
         private void left_MouseClick(object sender, MouseEventArgs e)
         {
-            if ((e.Button == MouseButtons.Left) & (e.X > 13))
-            {
-                this.left.SetItemChecked(this.left.SelectedIndex, !this.left.GetItemChecked(this.left.SelectedIndex));
-            }
+
         }
 
         private void right_MouseClick(object sender, MouseEventArgs e)
         {
-            if ((e.Button == MouseButtons.Left) & (e.X > 13))
+
+        }
+
+        private void right_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void left_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            Graphics g = e.Graphics;
+            if (e.Index != -1)
             {
-                this.right.SetItemChecked(this.right.SelectedIndex, !this.right.GetItemChecked(this.right.SelectedIndex));
+                var s = left.Items[e.Index].ToString();
+                
+                if (s.Contains(" [ FOLDER ]"))
+                {
+                    g.FillRectangle(new SolidBrush(Color.Silver), e.Bounds);
+                }
+                else if (s.Contains(" [ file ]"))
+                {
+                    g.FillRectangle(new SolidBrush(Color.AliceBlue), e.Bounds);
+                }
+                // Print text
             }
+            e.DrawFocusRectangle();
         }
     }
 
