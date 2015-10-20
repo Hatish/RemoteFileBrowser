@@ -34,14 +34,12 @@
             // 
             // left
             // 
-            this.left.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.left.FormattingEnabled = true;
             this.left.Location = new System.Drawing.Point(13, 13);
             this.left.Name = "left";
             this.left.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.left.Size = new System.Drawing.Size(500, 706);
             this.left.TabIndex = 2;
-            this.left.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.left_DrawItem);
             this.left.DoubleClick += new System.EventHandler(this.left_DoubleClick);
             // 
             // right

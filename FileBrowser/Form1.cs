@@ -53,6 +53,8 @@ namespace FileBrowser
                 var files = Directory.GetFiles(leftPaneDirectory);
                 var dirs = Directory.GetDirectories(leftPaneDirectory);
 
+                left.Items.Add(" .. [ BACK ]");
+
                 foreach (var d in dirs)
                 {
                     left.Items.Add(Path.GetFileNameWithoutExtension(d) + " [ FOLDER ]");
@@ -76,11 +78,6 @@ namespace FileBrowser
             {
 
             }
-
-            foreach (var i in left.Items)
-            {
-                
-            }
         }
 
         private void left_DoubleClick(object sender, EventArgs e)
@@ -88,7 +85,20 @@ namespace FileBrowser
             Debug.WriteLine("Double Click! - " + left.SelectedItem);
 
             var s = left.SelectedItem.ToString();
-            if (s.Contains(" [ FOLDER ]"))
+            if (s.Contains(" [ BACK ]"))
+            {
+                var parent = Directory.GetParent(leftPaneDirectory);
+                if (parent == null)
+                {
+                    leftPaneDirectory = "";
+                }
+                else
+                {
+                    leftPaneDirectory = parent.FullName;
+                }
+                UpdatePanes();
+            }
+            else if (s.Contains(" [ FOLDER ]"))
             {
                 s = s.Replace(" [ FOLDER ]", "");
                 leftPaneDirectory = Path.Combine(leftPaneDirectory, s);
@@ -102,40 +112,9 @@ namespace FileBrowser
             }
         }
 
-        private void left_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void right_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void right_DoubleClick(object sender, EventArgs e)
         {
 
-        }
-
-        private void left_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            e.DrawBackground();
-            Graphics g = e.Graphics;
-            if (e.Index != -1)
-            {
-                var s = left.Items[e.Index].ToString();
-                
-                if (s.Contains(" [ FOLDER ]"))
-                {
-                    g.FillRectangle(new SolidBrush(Color.Silver), e.Bounds);
-                }
-                else if (s.Contains(" [ file ]"))
-                {
-                    g.FillRectangle(new SolidBrush(Color.AliceBlue), e.Bounds);
-                }
-                // Print text
-            }
-            e.DrawFocusRectangle();
         }
     }
 
