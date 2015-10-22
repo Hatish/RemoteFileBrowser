@@ -10,3 +10,9 @@ C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\Remo
 C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowserService.csprojResolveAssemblyReference.cache
 C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.exe
 C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.pdb
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RemoteFileBrowser.exe.config
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RemoteFileBrowser.exe
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\bin\Debug\RemoteFileBrowser.pdb
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowserService.csprojResolveAssemblyReference.cache
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.exe
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\RemoteFileBrowser\obj\Debug\RemoteFileBrowser.pdb

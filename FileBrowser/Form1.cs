@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,96 +26,146 @@ namespace FileBrowser
 
         public string leftPaneDirectory = "";
         public string rightPaneDirectory = "";
+        public bool loading = false;
+
+        public List<string> Files;
+        public List<string> Folders;
 
         public MainForm()
         {
             InitializeComponent();
-            cb = new ClientCallback(this);
-            server = new FileBrowserHelper();
-            server.LoadServerListener();
-            client = new FileBrowserHelper();
-            client.LoadClientListener(cb);
-            client.SendMessageToServer(js.Serialize(new Request() { RequestType = Models.RequestEnum.ListOfDrives }));
+
+            new Task(() =>
+            {
+                server = new FileBrowserHelper();
+                server.LoadServerListener();
+            }).Start();
+
+            new Task(() =>
+                {
+                    cb = new ClientCallback(this);
+                    client = new FileBrowserHelper();
+                    client.LoadClientListener(cb);
+                    client.SendMessageToServer(js.Serialize(new Request() { RequestType = Models.RequestEnum.ListOfDrives }));
+                }).Start();
+        }
+
+        public void UpdateProgress(int filePerc, int jobPerc)
+        {
+            jobProgress.Value = jobPerc;
+            fileProgress.Value = filePerc;
         }
 
         public void UpdatePanes()
         {
-            if (String.IsNullOrEmpty(leftPaneDirectory))
+            UpdatePane(left, ref leftPaneDirectory);
+            UpdatePane(right, ref rightPaneDirectory);
+        }
+
+        private void UpdatePane(ListView box, ref string dir)
+        {
+            if (String.IsNullOrEmpty(dir))
             {
-                left.Items.Clear();
+                box.Items.Clear();
                 foreach (var d in drives)
                 {
-                    left.Items.Add(d.DriveLetter + " [" + d.DriveType + "]");
+                    box.Items.Add(d.DriveLetter + " [" + d.DriveType + "]");
                 }
+
+                UpdateDirBoxes();
             }
             else
             {
-                left.Items.Clear();
-                var files = Directory.GetFiles(leftPaneDirectory);
-                var dirs = Directory.GetDirectories(leftPaneDirectory);
+                client.SendMessageToServer(js.Serialize(new Request() { RequestType = Models.RequestEnum.OpenFolder, Data = dir }));
+                loading = true;
+                while (loading) { Thread.Sleep(200); }
 
-                left.Items.Add(" .. [ BACK ]");
+                box.Items.Clear();
+                var files = this.Files;
+                var dirs = this.Folders;
+
+                box.Items.Add(" .. [ BACK ]");
 
                 foreach (var d in dirs)
                 {
-                    left.Items.Add(Path.GetFileNameWithoutExtension(d) + " [ FOLDER ]");
+                    box.Items.Add(Path.GetFileName(d) + " [ FOLDER ]");
                 }
 
                 foreach (var f in files)
                 {
-                    left.Items.Add(Path.GetFileName(f) + " [ file ]");
+                    box.Items.Add(Path.GetFileName(f) + " [ file ]");
                 }
-            }
 
-            if (String.IsNullOrEmpty(rightPaneDirectory))
-            {
-                right.Items.Clear();
-                foreach (var d in drives)
-                {
-                    right.Items.Add(d.DriveLetter + " [" + d.DriveType + "]");
-                }
-            }
-            else
-            {
-
+                UpdateDirBoxes();
             }
         }
 
-        private void left_DoubleClick(object sender, EventArgs e)
+        private void HandleDoubleClick(ListView box, string s, ref string dir)
         {
-            Debug.WriteLine("Double Click! - " + left.SelectedItem);
-
-            var s = left.SelectedItem.ToString();
             if (s.Contains(" [ BACK ]"))
             {
-                var parent = Directory.GetParent(leftPaneDirectory);
+                var parent = Directory.GetParent(dir);
                 if (parent == null)
                 {
-                    leftPaneDirectory = "";
+                    dir = "";
                 }
                 else
                 {
-                    leftPaneDirectory = parent.FullName;
+                    dir = parent.FullName;
                 }
-                UpdatePanes();
+                UpdatePane(box, ref dir);
             }
             else if (s.Contains(" [ FOLDER ]"))
             {
                 s = s.Replace(" [ FOLDER ]", "");
-                leftPaneDirectory = Path.Combine(leftPaneDirectory, s);
-                UpdatePanes();
+                dir = Path.Combine(dir, s);
+                UpdatePane(box, ref dir);
             }
             else if (!s.Contains(" [ file ]") && s[3] == ' ')
             {
                 s = s.Substring(0, 3);
-                leftPaneDirectory = Path.Combine(leftPaneDirectory, s);
-                UpdatePanes();
+                dir = Path.Combine(dir, s);
+                UpdatePane(box, ref dir);
             }
         }
 
-        private void right_DoubleClick(object sender, EventArgs e)
+        private void UpdateDirBoxes()
         {
+            leftBox.Text = leftPaneDirectory;
+            rightBox.Text = rightPaneDirectory;
+        }
 
+        private void left_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var ret = left.HitTest(e.Location);
+            var item = ret.Item;
+            HandleDoubleClick(left, item.Text, ref leftPaneDirectory);
+        }
+
+        private void right_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var ret = right.HitTest(e.Location);
+            var item = ret.Item;
+            HandleDoubleClick(right, item.Text, ref rightPaneDirectory);
+        }
+
+        private void copyLeftToRight_Click(object sender, EventArgs e)
+        {
+            List<string> sourceItems = new List<string>();
+            foreach (ListViewItem i in left.SelectedItems)
+            {
+                if (i.Text.Contains(" [ FOLDER ]") || i.Text.Contains(" [ file ]"))
+                {
+                    sourceItems.Add(Path.Combine(leftPaneDirectory, i.Text.Replace(" [ FOLDER ]", "").Replace(" [ file ]", "")));
+                }
+            }
+
+            if (sourceItems.Count == 0 || String.IsNullOrWhiteSpace(rightPaneDirectory))
+            {
+                return;
+            }
+
+            client.SendMessageToServer(js.Serialize(new Request() { RequestType = Models.RequestEnum.CopyData, Data = new CopyDataRequest() { Data = sourceItems, Destination = rightPaneDirectory } }));
         }
     }
 
@@ -127,16 +178,42 @@ namespace FileBrowser
         {
             form = f;
         }
+
         public void Handle(Response r)
         {
             if (r.RequestType == RequestEnum.ListOfDrives)
             {
                 form.drives = JArray.FromObject(r.Data).ToObject<List<DriveData>>();
-
                 form.Invoke((MethodInvoker)delegate
                 {
                     form.UpdatePanes();
                 });
+            }
+            else if (r.RequestType == RequestEnum.OpenFolder)
+            {
+                FolderData data = ((JObject)r.Data).ToObject<FolderData>();
+                form.Files = data.Files;
+                form.Folders = data.Folders;
+                form.loading = false;
+            }
+            else if (r.RequestType == RequestEnum.CopyData)
+            {
+                Debug.WriteLine("Client Recieved Copy Complete!");
+                form.Invoke((MethodInvoker)delegate
+                {
+                    form.UpdatePanes();
+                });
+                form.loading = false;
+            }
+            else if (r.RequestType == RequestEnum.CopyUpdate)
+            {
+                CopyDataUpdate data = ((JObject)r.Data).ToObject<CopyDataUpdate>();
+                Debug.WriteLine("Job Progress: " + (data.jobProgress * 100.0 / data.jobTotal * 1.0) + " - Copy Progress: " + data.Progress);
+                form.Invoke((MethodInvoker)delegate
+                {
+                    form.UpdateProgress(data.Progress, Convert.ToInt32(data.jobProgress * 100.0 / data.jobTotal * 1.0));
+                });
+                
             }
         }
     }

@@ -20,3 +20,14 @@ C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\Helpers\bin\Debug\RabbitMQ.Clien
 C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
 C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\Helpers\obj\Debug\Helpers.dll
 C:\Dev\Apps\RemoteFileBrowser\RemoteFileBrowser\Helpers\obj\Debug\Helpers.pdb
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\bin\Debug\Helpers.dll
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\bin\Debug\Helpers.pdb
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\bin\Debug\Models.dll
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\bin\Debug\Newtonsoft.Json.dll
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\bin\Debug\RabbitMQ.Client.dll
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\bin\Debug\Models.pdb
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\bin\Debug\Newtonsoft.Json.xml
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\bin\Debug\RabbitMQ.Client.xml
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\obj\Debug\Helpers.dll
+C:\Dev\Hatish\RemoteFileBrowser\RemoteFileBrowser\Helpers\obj\Debug\Helpers.pdb

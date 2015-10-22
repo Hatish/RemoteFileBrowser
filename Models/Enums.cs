@@ -8,6 +8,9 @@ namespace Models
 {
     public enum RequestEnum
     {
-        ListOfDrives = 1
+        ListOfDrives = 1,
+        OpenFolder = 2,
+        CopyData = 3,
+        CopyUpdate = 4
     }
 }

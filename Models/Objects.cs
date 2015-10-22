@@ -30,6 +30,27 @@ namespace Models
         public string DriveType;
     }
 
+    public class FolderData
+    {
+        public List<string> Files;
+        public List<string> Folders;
+    }
+
+    public class CopyDataRequest
+    {
+        public List<string> Data;
+        public string Destination;
+    }
+
+    public class CopyDataUpdate
+    {
+        public string Source;
+        public string Destination;
+        public int Progress;
+        public long jobProgress;
+        public long jobTotal;
+    }
+
     public interface IClientCallback
     {
         void Handle(Response r);
