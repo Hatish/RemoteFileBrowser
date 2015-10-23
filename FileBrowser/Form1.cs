@@ -30,6 +30,7 @@ namespace FileBrowser
 
         public List<string> Files;
         public List<string> Folders;
+        public List<string> Drives;
 
         public MainForm()
         {
@@ -50,9 +51,12 @@ namespace FileBrowser
                 }).Start();
         }
 
-        public void UpdateProgress(int filePerc, int jobPerc)
+        public void UpdateProgress(int filePerc, int jobPerc, string fileName)
         {
+            filePerc = filePerc > 100 ? 100 : filePerc;
+            jobPerc = jobPerc > 100 ? 100 : jobPerc;
             jobProgress.Value = jobPerc;
+            commentBox.Text = "Copying file: " + fileName;
             fileProgress.Value = filePerc;
         }
 
@@ -67,9 +71,12 @@ namespace FileBrowser
             if (String.IsNullOrEmpty(dir))
             {
                 box.Items.Clear();
+                Drives = new List<string>();
                 foreach (var d in drives)
                 {
-                    box.Items.Add(d.DriveLetter + " [" + d.DriveType + "]");
+                    var dr = d.DriveLetter + " [" + d.DriveType + "]";
+                    Drives.Add(dr);
+                    box.Items.Add(new ListViewItem(dr, 3));
                 }
 
                 UpdateDirBoxes();
@@ -84,16 +91,16 @@ namespace FileBrowser
                 var files = this.Files;
                 var dirs = this.Folders;
 
-                box.Items.Add(" .. [ BACK ]");
+                box.Items.Add(new ListViewItem(" .. [ BACK ]", 0));
 
                 foreach (var d in dirs)
                 {
-                    box.Items.Add(Path.GetFileName(d) + " [ FOLDER ]");
+                    box.Items.Add(new ListViewItem(Path.GetFileName(d), 1));
                 }
 
                 foreach (var f in files)
                 {
-                    box.Items.Add(Path.GetFileName(f) + " [ file ]");
+                    box.Items.Add(new ListViewItem(Path.GetFileName(f), 2));
                 }
 
                 UpdateDirBoxes();
@@ -102,6 +109,7 @@ namespace FileBrowser
 
         private void HandleDoubleClick(ListView box, string s, ref string dir)
         {
+            
             if (s.Contains(" [ BACK ]"))
             {
                 var parent = Directory.GetParent(dir);
@@ -114,14 +122,16 @@ namespace FileBrowser
                     dir = parent.FullName;
                 }
                 UpdatePane(box, ref dir);
+                return;
             }
-            else if (s.Contains(" [ FOLDER ]"))
+
+            dir = Path.Combine(dir, s);
+            if (Folders != null && Folders.Contains(dir))
             {
-                s = s.Replace(" [ FOLDER ]", "");
-                dir = Path.Combine(dir, s);
                 UpdatePane(box, ref dir);
             }
-            else if (!s.Contains(" [ file ]") && s[3] == ' ')
+            //else if (!s.Contains(" [ file ]") && s[3] == ' ')
+            else if (Drives.Contains(s))
             {
                 s = s.Substring(0, 3);
                 dir = Path.Combine(dir, s);
@@ -154,9 +164,9 @@ namespace FileBrowser
             List<string> sourceItems = new List<string>();
             foreach (ListViewItem i in left.SelectedItems)
             {
-                if (i.Text.Contains(" [ FOLDER ]") || i.Text.Contains(" [ file ]"))
+                if (!i.Text.Contains(" [ BACK ]"))
                 {
-                    sourceItems.Add(Path.Combine(leftPaneDirectory, i.Text.Replace(" [ FOLDER ]", "").Replace(" [ file ]", "")));
+                    sourceItems.Add(Path.Combine(leftPaneDirectory, i.Text));
                 }
             }
 
@@ -211,9 +221,8 @@ namespace FileBrowser
                 Debug.WriteLine("Job Progress: " + (data.jobProgress * 100.0 / data.jobTotal * 1.0) + " - Copy Progress: " + data.Progress);
                 form.Invoke((MethodInvoker)delegate
                 {
-                    form.UpdateProgress(data.Progress, Convert.ToInt32(data.jobProgress * 100.0 / data.jobTotal * 1.0));
+                    form.UpdateProgress(data.Progress, Convert.ToInt32(data.jobProgress * 100.0 / data.jobTotal * 1.0), Path.GetFileName(data.Source));
                 });
-                
             }
         }
     }

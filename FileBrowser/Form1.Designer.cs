@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.left = new System.Windows.Forms.ListView();
-            this.right = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.right = new System.Windows.Forms.ListView();
             this.copyLeftToRight = new System.Windows.Forms.Button();
             this.leftBox = new System.Windows.Forms.TextBox();
             this.rightBox = new System.Windows.Forms.TextBox();
@@ -46,26 +47,31 @@
             this.left.Location = new System.Drawing.Point(13, 39);
             this.left.Name = "left";
             this.left.Size = new System.Drawing.Size(500, 594);
+            this.left.SmallImageList = this.imageList1;
             this.left.TabIndex = 4;
             this.left.UseCompatibleStateImageBehavior = false;
             this.left.View = System.Windows.Forms.View.List;
             this.left.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.left_MouseDoubleClick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "6.png");
+            this.imageList1.Images.SetKeyName(1, "Explorer.png");
+            this.imageList1.Images.SetKeyName(2, "Notepad.png");
+            this.imageList1.Images.SetKeyName(3, "System HD.png");
             // 
             // right
             // 
             this.right.Location = new System.Drawing.Point(672, 39);
             this.right.Name = "right";
             this.right.Size = new System.Drawing.Size(500, 594);
+            this.right.SmallImageList = this.imageList1;
             this.right.TabIndex = 5;
             this.right.UseCompatibleStateImageBehavior = false;
             this.right.View = System.Windows.Forms.View.List;
             this.right.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.right_MouseDoubleClick);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // copyLeftToRight
             // 
