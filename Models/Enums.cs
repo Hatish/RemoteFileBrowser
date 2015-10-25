@@ -11,6 +11,7 @@ namespace Models
         ListOfDrives = 1,
         OpenFolder = 2,
         CopyData = 3,
-        CopyUpdate = 4
+        CopyUpdate = 4,
+        MoveData = 5
     }
 }

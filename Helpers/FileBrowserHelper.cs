@@ -72,7 +72,9 @@ namespace RemoteFileBrowser
                         var message = Encoding.UTF8.GetString(body);
                         Debug.WriteLine(" [x] Received On Client: " + message);
                         Response r = JObject.Parse(message).ToObject<Response>();
-                        cb.Handle(r);
+
+                        // This needs to be moved into its own threads.
+                        new Thread(u => { cb.Handle(r); }).Start();
                     };
                     channel.BasicConsume(queue: clientQueue, noAck: true, consumer: consumer);
 
@@ -96,7 +98,12 @@ namespace RemoteFileBrowser
             else if (r.RequestType == RequestEnum.CopyData)
             {
                 var j = ((JObject)r.Data).ToObject<CopyDataRequest>();
-                SendMessageToClient(CopyData(j.Data as List<string>, j.Destination));
+                SendMessageToClient(CopyData(j.Data as List<string>, j.Destination, false));
+            }
+            else if (r.RequestType == RequestEnum.MoveData)
+            {
+                var j = ((JObject)r.Data).ToObject<CopyDataRequest>();
+                SendMessageToClient(CopyData(j.Data as List<string>, j.Destination, true));
             }
         }
 
@@ -191,12 +198,12 @@ namespace RemoteFileBrowser
             }
         }
 
-        public string CopyData(List<string> data, string destination)
+        public string CopyData(List<string> data, string destination, bool move)
         {
             if (!Directory.Exists(destination)) { return ""; }
             jobSize = 0;
 
-            foreach (var s in data)
+            foreach (var s in data)  
             {
                 if (File.Exists(s))
                 {
@@ -212,18 +219,18 @@ namespace RemoteFileBrowser
             {
                 if (File.Exists(s))
                 {
-                    CopyFile(s, Path.Combine(destination, Path.GetFileName(s)));
+                    CopyFile(s, Path.Combine(destination, Path.GetFileName(s)), move);
                 }
                 else if (Directory.Exists(s))
                 {
-                    DirectoryCopy(s, Path.Combine(destination, Path.GetFileName(s)), true);
+                    DirectoryCopy(s, Path.Combine(destination, Path.GetFileName(s)), true, move);
                 }
             }
 
             return js.Serialize(new Response() { Data = "Success", id = 0, RequestType = RequestEnum.CopyData });
         }
 
-        private void CopyFile(string src, string dest)
+        private void CopyFile(string src, string dest, bool move)
         {
             copyPercentage = 0;
             destination = dest;
@@ -231,6 +238,15 @@ namespace RemoteFileBrowser
             copier.OnProgressChanged += copier_OnProgressChanged;
             copier.OnComplete += copier_OnComplete;
             copier.Copy();
+
+            try
+            {
+                if (move)
+                {
+                    File.Delete(src);
+                }
+            }
+            catch { }
         }
 
         void copier_OnComplete(long bytes)
@@ -252,7 +268,7 @@ namespace RemoteFileBrowser
             }
         }
 
-        private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs, bool move)
         {
             // Get the subdirectories for the specified directory.
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
@@ -274,7 +290,7 @@ namespace RemoteFileBrowser
             foreach (FileInfo file in files)
             {
                 string temppath = Path.Combine(destDirName, file.Name);
-                CopyFile(file.FullName, temppath);
+                CopyFile(file.FullName, temppath, move);
             }
 
             // If copying subdirectories, copy them and their contents to new location.
@@ -283,7 +299,7 @@ namespace RemoteFileBrowser
                 foreach (DirectoryInfo subdir in dirs)
                 {
                     string temppath = Path.Combine(destDirName, subdir.Name);
-                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                    DirectoryCopy(subdir.FullName, temppath, copySubDirs, move);
                 }
             }
         }
@@ -291,7 +307,7 @@ namespace RemoteFileBrowser
         private long GetTotalSizeOfDirectory(string destination)
         {
             long size = 0;
-            var files = Directory.GetFiles(destination, "", SearchOption.AllDirectories);
+            var files = Directory.GetFiles(destination, "*.*", SearchOption.AllDirectories);
             foreach (var f in files)
             {
                 size += new FileInfo(f).Length;

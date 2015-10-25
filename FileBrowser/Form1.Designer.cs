@@ -39,6 +39,7 @@
             this.jobProgress = new System.Windows.Forms.ProgressBar();
             this.commentBox = new System.Windows.Forms.TextBox();
             this.fileProgress = new System.Windows.Forms.ProgressBar();
+            this.moveLeftToRight = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // left
@@ -121,11 +122,22 @@
             this.fileProgress.Size = new System.Drawing.Size(1159, 23);
             this.fileProgress.TabIndex = 11;
             // 
+            // moveLeftToRight
+            // 
+            this.moveLeftToRight.Location = new System.Drawing.Point(519, 96);
+            this.moveLeftToRight.Name = "moveLeftToRight";
+            this.moveLeftToRight.Size = new System.Drawing.Size(147, 51);
+            this.moveLeftToRight.TabIndex = 12;
+            this.moveLeftToRight.Text = "Move >>";
+            this.moveLeftToRight.UseVisualStyleBackColor = true;
+            this.moveLeftToRight.Click += new System.EventHandler(this.moveLeftToRight_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 729);
+            this.Controls.Add(this.moveLeftToRight);
             this.Controls.Add(this.fileProgress);
             this.Controls.Add(this.commentBox);
             this.Controls.Add(this.jobProgress);
@@ -151,6 +163,7 @@
         private System.Windows.Forms.ProgressBar jobProgress;
         private System.Windows.Forms.TextBox commentBox;
         private System.Windows.Forms.ProgressBar fileProgress;
+        private System.Windows.Forms.Button moveLeftToRight;
 
 
     }

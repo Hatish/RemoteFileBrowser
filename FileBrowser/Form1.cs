@@ -177,6 +177,25 @@ namespace FileBrowser
 
             client.SendMessageToServer(js.Serialize(new Request() { RequestType = Models.RequestEnum.CopyData, Data = new CopyDataRequest() { Data = sourceItems, Destination = rightPaneDirectory } }));
         }
+
+        private void moveLeftToRight_Click(object sender, EventArgs e)
+        {
+            List<string> sourceItems = new List<string>();
+            foreach (ListViewItem i in left.SelectedItems)
+            {
+                if (!i.Text.Contains(" [ BACK ]"))
+                {
+                    sourceItems.Add(Path.Combine(leftPaneDirectory, i.Text));
+                }
+            }
+
+            if (sourceItems.Count == 0 || String.IsNullOrWhiteSpace(rightPaneDirectory))
+            {
+                return;
+            }
+
+            client.SendMessageToServer(js.Serialize(new Request() { RequestType = Models.RequestEnum.MoveData, Data = new CopyDataRequest() { Data = sourceItems, Destination = rightPaneDirectory } }));
+        }
     }
 
     public class ClientCallback : IClientCallback
